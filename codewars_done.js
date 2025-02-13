@@ -501,3 +501,173 @@ function findOdd(arr) {
 function makeNegative(num) {
   return num > 0 ? num * -1 : num;
 }
+
+//28
+function positiveSum(arr) {
+  let sum = 0;
+  const positive = arr
+    .filter((item) => item > 0)
+    .forEach((item) => (sum += item));
+  return sum;
+}
+positiveSum([1, -2, 3, 4, 5]);
+
+//НЕ ВИРІШИЛА
+//A pangram is a sentence that contains every single letter of the alphabet at
+//  least once. For example, the sentence "The quick brown fox jumps over the lazy dog" is
+//  a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+//Given a string, detect whether or not it is a pangram. Return True if it is, False if not. Ignore numbers and punctuation.
+function isPangram(string) {
+  const alphabetList = [..."abcdefghijklmnopqrstuvwxyz"];
+
+  return alphabetList.every((letter) => string.toLowerCase().includes(letter));
+}
+
+function isPangram(string) {
+  return "abcdefghijklmnopqrstuvwxyz"
+    .split("")
+    .every((x) => string.toLowerCase().includes(x));
+}
+
+//29
+// function reverseWords(str) {
+//   const arr = str.split(" ");
+//   const reverseArr = [];
+
+//   for (item of arr) {
+//     let reverseItem = item.split("").reverse().join("");
+//     reverseArr.push(reverseItem);
+//   }
+//   return reverseArr.join(" ");
+// }
+
+function reverseWords(str) {
+  return str
+    .split(" ")
+    .map((item) => item.split("").reverse().join(""))
+    .join(" ");
+}
+
+reverseWords("double  spaces");
+
+//30
+function count(string) {
+  let obj = {};
+  let arr = string.split("");
+
+  for (item of arr) {
+    if (!obj.hasOwnProperty(item)) {
+      obj[item] = 1;
+    } else {
+      obj[item] += 1;
+    }
+  }
+  return obj;
+}
+
+// //function count (string) {
+//   var count = {};
+//   string.split('').forEach(function(s) {
+//      count[s] ? count[s]++ : count[s] = 1;
+//   });
+//   return count;
+// }
+count("abaddddddddd");
+
+//31
+function getCount(str) {
+  let vowelsArr = ["a", "e", "i", "o", "u"];
+  let counter = 0;
+
+  str.split("").map((item) => {
+    if (vowelsArr.includes(item)) {
+      counter += 1;
+    }
+  });
+
+  return counter;
+}
+
+getCount("aaaaaaaaa");
+
+//ALTERNATIVE
+// function getCount(str) {
+//   var vowelsCount = 0;
+//   var vowels = ["a", "e", "i", "o", "u"];
+//   for (var i = 0; i < str.length; i++) {
+//     for (var j = 0; j < vowels.length; j++) {
+//       if (str[i] === vowels[j]) {
+//         vowelsCount++;
+//       }
+//     }
+//   }
+
+//   return vowelsCount;
+// }
+
+// function getCount(str) {
+//   return str.split("").filter((c) => "aeiouAEIOU".includes(c)).length;
+// }
+
+//32
+//НЕ ВИРІШИЛА
+// Count the number of Duplicates
+// Write a function that will return the count of distinct case-insensitive
+// alphabetic characters and numeric digits that occur more than once in the input string.
+//  The input string can be assumed to contain only alphabets (both uppercase and lowercase)
+//  and numeric digits.
+
+// Example
+// "abcde" -> 0 # no characters repeats more than once
+// "aabbcde" -> 2 # 'a' and 'b'
+// "aabBcde" -> 2 # 'a' occurs twice and 'b' twice (`b` and `B`)
+// "indivisibility" -> 1 # 'i' occurs six times
+// "Indivisibilities" -> 2 # 'i' occurs seven times and 's' occurs twice
+// "aA11" -> 2 # 'a' and '1'
+// "ABBA" -> 2 # 'A' and 'B' each occur twice
+
+function duplicateCount(text) {
+  return text
+    .toLowerCase()
+    .split("")
+    .filter(function (val, i, arr) {
+      return arr.indexOf(val) !== i && arr.lastIndexOf(val) === i;
+    }).length;
+}
+//https://chatgpt.com/share/67ad005a-fe04-800e-9103-386c4ed1801d
+
+const duplicateCount = (string) => {
+  // makes an array all lowercase and sorts the array in alpha order for easy comparrison
+  let newString = string.toLowerCase().split("").sort();
+
+  // this array will house the duplicated values so we can
+  // get the length of it (or the number of duplicated characters).
+  let newArray = [];
+
+  // set a loop for the array
+  for (i = 0; i < newString.length; i++) {
+    // if the current element equals the following element the push it to the new array AND
+    // ONLY if the new array doesn't already include the current element
+    if (newString[i] === newString[i + 1] && !newArray.includes(newString[i])) {
+      // push elements to new array
+      newArray.push(newString[i]);
+    }
+  }
+  // return the number of elements in the array to represent the number characters that were duplicated
+  return newArray.length;
+};
+
+//33
+function descendingOrder(n) {
+  return Number(
+    n
+      .toString()
+      .split("")
+      .sort((a, b) => b - a)
+      .join("")
+  );
+}
+
+descendingOrder(145263);
+
+//34
