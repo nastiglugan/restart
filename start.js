@@ -1,7 +1,34 @@
-// function deleteNth(arr, n) {
-//   let newArr = [];
+function likes(names) {
+  let namesLength = names.length;
+  let difference = names.length - 2;
+  let message;
+  console.log(namesLength);
 
-//   for (i = 0; i < arr.length; i = n) {}
-// }
+  switch (namesLength) {
+    case 1:
+      message = `${names[0]} likes this`;
+      break;
 
-// deleteNth([1, 1, 1, 2, 2, 2, 3, 3, 3], 1);
+    case 2:
+      message = `${names[0]} and ${names[1]} like this`;
+      break;
+
+    case 3:
+      message = `${names[0]}, ${names[1]} and ${names[2]} like this`;
+      break;
+
+    case 0:
+      message = "no one likes this";
+      break;
+
+    default:
+      message = `${names[0]}, ${names[1]} and ${difference} like this`;
+  }
+  console.log(message);
+  return message;
+}
+likes([]);
+likes(["Nastia"]);
+likes(["Jacob", "Alex"]);
+likes(["Max", "John", "Mark"]);
+likes(["Alex", "Jacob", "Mark", "Max", "Max", "Max", "Max"]);

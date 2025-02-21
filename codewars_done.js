@@ -671,3 +671,193 @@ function descendingOrder(n) {
 descendingOrder(145263);
 
 //34
+function deleteNth(arr, n) {
+  let counts = {}; // Тут будемо рахувати, скільки разів зустрічається кожне число
+  let result = []; // Сюди будемо додавати числа
+
+  for (let num of arr) {
+    if ((counts[num] || 0) < n) {
+      // Якщо число ще не зустрічалося N разів
+      result.push(num); // Додаємо його в результат
+      counts[num] = (counts[num] || 0) + 1; // Оновлюємо лічильник
+    }
+  }
+
+  return result;
+}
+
+//35
+// Видалити дублікати, але залишити перші входження
+// Умова: Дано масив чисел. Потрібно повернути новий масив, де кожне число зустрічається лише один раз, але в тому ж порядку, в якому воно було вперше.
+
+// Приклад:
+
+// js
+// Копіювати
+// Редагувати
+// unique([1, 2, 3, 1, 2, 3, 4]); // → [1, 2, 3, 4]
+// unique([5, 5, 5, 2, 3, 2]); // → [5, 2, 3]
+
+function removeDuplicates(arr) {
+  let obj = {};
+  let newArr = [];
+
+  for (item of arr) {
+    if (!obj[item]) {
+      newArr.push(item);
+      obj[item] = 1;
+      console.log(obj[item]);
+    }
+  }
+  console.log(obj);
+  console.log(newArr);
+  return newArr;
+}
+
+removeDuplicates([5, 5, 5, 2, 3, 2]);
+
+//36
+// Implement a function that computes the difference between two lists. The function should remove all occurrences of elements from the first list (a) that are present in the second list (b). The order of elements in the first list should be preserved in the result.
+
+// Examples
+// If a = [1, 2] and b = [1], the result should be [2].
+
+// If a = [1, 2, 2, 2, 3] and b = [2], the result should be [1, 3].
+let arr1 = [1, 2, 3, -1];
+let arr2 = [1];
+
+function arrayDiff(arr1, arr2) {
+  return arr1.filter((item) => !arr2.includes(item));
+}
+arrayDiff(arr1, arr2);
+
+//37
+// Write a function that takes an array of numbers (integers for the tests) and a target number. It should find two different items in the array that, when added together, give the target value. The indices of these items should then be returned in a tuple / list (depending on your language) like so: (index1, index2).
+
+// For the purposes of this kata, some tests may have multiple answers; any valid solutions will be accepted.
+
+// The input will always be valid (numbers will be an array of length 2 or greater, and all of the items will be numbers; target will always be the sum of two different items from that array).
+
+// Based on: https://leetcode.com/problems/two-sum/
+
+// twoSum([1, 2, 3], 4) // returns [0, 2] or [2, 0]
+// twoSum([3, 2, 4], 6) // returns [1, 2] or [2, 1]
+
+// function twoSum(numbers, target) {
+//   for (var i = 0; i < numbers.length; i++) {
+//     for (var j = 0; j < numbers.length; j++) {
+//       if (i !== j && numbers[i] + numbers[j] === target) {
+//         return [i, j];
+//       }
+//     }
+//   }
+//   return [];
+// }
+
+// function twoSum(numbers, target) {
+//   for (var i = 0; i < numbers.length - 1; i++) {
+//     for (var j = i + 1; j < numbers.length; j++) {
+//       if (numbers[i] + numbers[j] === target) return [i, j];
+//     }
+//   }
+// }
+
+function twoSum(numbers, target) {
+  const map = new Map();
+  console.log(map);
+
+  for (let i = 0; i < numbers.length; i++) {
+    let complement = target - numbers[i];
+
+    if (map.has(complement)) {
+      return [map.get(complement), i]; // Повертаємо індекси пари
+    }
+
+    map.set(numbers[i], i);
+  }
+
+  return []; // Якщо рішення не знайдено (але згідно з умовою, воно завжди є)
+}
+
+twoSum([1, 2, 3], 4);
+
+//38
+// Your task is to sort a given string. Each word in the string will contain a single number. This number is the position the word should have in the result.
+
+// Note: Numbers can be from 1 to 9. So 1 will be the first word (not 0).
+
+// If the input string is empty, return an empty string. The words in the input String will only contain valid consecutive numbers.
+
+// Examples
+// "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+// "4of Fo1r pe6ople g3ood th5e the2"  -->  "Fo1r the2 g3ood 4of th5e pe6ople"
+// ""  -->  ""
+
+// function order(words) {
+//   let sentenceArr = words.split(" ");
+//   let numberArr = [];
+
+//   let newArr = [];
+
+//   let number = sentenceArr.map((item) =>
+//     item.split("").map((letter) => {
+//       if (Number(letter)) {
+//         numberArr.push(Number(letter));
+//       }
+//     })
+//   );
+
+//   let sortedArr = numberArr.sort();
+//   console.log(sortedArr);
+
+//   for (i = 0; i < sentenceArr.length; i += 1) {
+//     for (j = 0; j < numberArr.length; j += 1) {
+//       if (sentenceArr[i].includes(numberArr[j])) {
+//         newArr.splice(numberArr[j], 0, sentenceArr[i]);
+//       }
+//     }
+//   }
+//   console.log(newArr);
+// }
+
+// function order(words) {
+//   let wordsArr = words.split(" ");
+//   let arr = words.split("");
+//   let numbers = [];
+//   let objArr = [];
+
+//   for (item of arr) {
+//     if (Number(item)) {
+//       numbers.push(Number(item));
+//     }
+//   }
+
+//   for (word of wordsArr) {
+//     for (item of numbers) {
+//       if (word.includes(item)) {
+//         objArr.push({ word: item });
+//       }
+//     }
+//     console.log(obj);
+//   }
+
+//   // const map = new Map();
+// }
+
+function order(words) {
+  var array = words.split(" ");
+
+  var sortedArray = [];
+  for (i = 0; i <= array.length; i++) {
+    for (j = 0; j < array.length; j++) {
+      if (array[j].indexOf(i) >= 0) {
+        sortedArray.push(array[j]);
+      }
+    }
+  }
+  return sortedArray.join(" ");
+}
+
+order("is2 Thi1s T4est 3a");
+
+//39
